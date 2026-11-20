@@ -42,9 +42,13 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.25,random_st
 tree = DecisionTreeClassifier(max_leaf_nodes=32,criterion="gini",random_state=1,min_samples_leaf=20,class_weight="balanced")
 tree.fit(X_train,y_train)
 
+y_pred = tree.predict(X_test)
+
 plt.figure(figsize=(12, 6))
 plot_tree(tree,class_names=tree.classes_.astype(str),impurity=True,precision=2)
 plt.show()
+
+# Sacar las metricas
 
 # Esto lo he sacado de otro ejercicio, mirar como buscarlo en el scikit learn pq no lo tendre en el examen
 importance = pd.Series(tree.feature_importances_, index=X.columns).sort_values()
